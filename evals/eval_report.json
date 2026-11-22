@@ -1,0 +1,99 @@
+{
+  "failed": 0,
+  "headline": {
+    "baselines_empirical_se": {
+      "equal_split": 0.028777,
+      "repeats_heavy": 0.027787,
+      "trajectories_heavy": 0.03634
+    },
+    "estimated_components": {
+      "var_g": 0.018883,
+      "var_q": 0.058286,
+      "var_t": 0.084454
+    },
+    "high_grader_noise_recommended": {
+      "empirical_se": 0.031787,
+      "n_questions": 153,
+      "n_repeats": 4,
+      "n_traj": 1
+    },
+    "pilot_degradation": {
+      "large_pilot": {
+        "mean_achieved_true_se": 0.027386,
+        "mean_component_relative_error": 0.097495,
+        "pilot_questions": 200,
+        "worst_achieved_true_se": 0.027386
+      },
+      "se_inflation_small_vs_large": 1.000621,
+      "small_pilot": {
+        "mean_achieved_true_se": 0.027403,
+        "mean_component_relative_error": 0.251939,
+        "pilot_questions": 20,
+        "worst_achieved_true_se": 0.027812
+      }
+    },
+    "recommended": {
+      "cost": 200000,
+      "empirical_se": 0.024614,
+      "n_questions": 200,
+      "n_repeats": 1,
+      "n_traj": 1,
+      "predicted_se": 0.028427,
+      "true_se": 0.027386
+    }
+  },
+  "passed": 10,
+  "results": [
+    {
+      "detail": "Q=200 T=1 R=1 cost=200000 budget=200000",
+      "name": "G1 recommended allocation is feasible (budget + pool + exact cost)",
+      "passed": true
+    },
+    {
+      "detail": "rec=0.024614 equal_split=0.028777 repeats_heavy=0.027787 trajectories_heavy=0.03634",
+      "name": "G2 recommended beats all naive baselines on held-out empirical SE",
+      "passed": true
+    },
+    {
+      "detail": "empirical=0.024614 true=0.027386",
+      "name": "G3 empirical SE tracks analytic true SE for the recommended allocation",
+      "passed": true
+    },
+    {
+      "detail": "est={'var_q': 0.058286, 'var_t': 0.084454, 'var_g': 0.018883} true={'var_q': 0.04, 'var_t': 0.09, 'var_g': 0.02}",
+      "name": "G4 pilot recovers planted variance components (incl. non-zero grader noise)",
+      "passed": true
+    },
+    {
+      "detail": "Q=153 T=1 R=4 empirical_se=0.031787",
+      "name": "G5 high grader-noise regime: repeats DO help (R > 1 recommended)",
+      "passed": true
+    },
+    {
+      "detail": "small_mean=0.027403 large_mean=0.027386 small_worst=0.027812 large_worst=0.027386 rel_err small=0.251939 large=0.097495",
+      "name": "G6 small pilot degrades the achieved SE vs large pilot",
+      "passed": true
+    },
+    {
+      "detail": "Q=300 T=6 R=2 cost=1980000",
+      "name": "G7 finite pool binds: huge budget caps Q at the pool and spends on T/R",
+      "passed": true
+    },
+    {
+      "detail": "codes=(0, 2, 2)",
+      "name": "G8 CLI check exit codes 0 / 2 / 2 (pass / bad budget / missing file)",
+      "passed": true
+    },
+    {
+      "detail": "two build_report() calls byte-identical as JSON",
+      "name": "G9 full report is deterministic (same seed -> same report)",
+      "passed": true
+    },
+    {
+      "detail": "standard var_g=0.020062 high var_g=0.25077",
+      "name": "G10 grader noise is a real level: high-noise pilot estimates >> standard",
+      "passed": true
+    }
+  ],
+  "total": 10
+}
